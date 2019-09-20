@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function(){
+  		$("#btn1").click(function(){
+    	$("#result1").fadeIn(1000);
+    	$("#div2").fadeIn(1000);
+  		});
+		});
+	</script>
+	<script>
+
+		function simpleIntrest() 
+		{
+			var p=parseInt(document.getElementById('principal').value);
+			var r=parseInt(document.getElementById('intrest').value);	
+			var n=parseInt(document.getElementById('pyears').value);
+
+			var validationData=validation(p,r,n);
+			if(validationData==true)
+			{
+			var simpleIntTotal=p+((p*r*n)/100);
+			console.log((Math.floor(simpleIntTotal)));
+
+			var  compoundIntTotal=p*(((1+(r)/100))**n);
+			console.log((Math.floor(compoundIntTotal)));
+
+			var diffrence=compoundIntTotal-simpleIntTotal;
+			console.log(Math.floor(diffrence));
+
+			document.getElementById('simple').innerHTML="Your Simple Interest Based Return : " +Math.floor(simpleIntTotal);
+			document.getElementById('int').innerHTML="Your Compound Interest Based Return : " +Math.floor(compoundIntTotal);
+			document.getElementById('diff').innerHTML="Diffrence Between Returns : " +Math.floor(diffrence);
+
+		
+			cleardata();
+		
+		}
+		}
+
+		
+		function cleardata()
+		{
+			document.getElementById('principal').value="";
+			document.getElementById('intrest').value="";
+			document.getElementById('pyears').value="";
+
+		}	
+
+		
+		function validation(principal,intrest,pyears)
+		{
+			var status=true;
+			if((principal=="")||(isNaN(principal)))
+			{
+				document.getElementById('principal').style.borderColor="red";
+				document.getElementById('principalerror').style.color="red";
+				document.getElementById('principalerror').innerHTML="Enter Your Principal Amount";
+				status=false;
+			}else
+			{
+				document.getElementById('principal').style.borderColor="";
+				document.getElementById('principalerror').innerHTML="";
+				document.getElementById('principalerror').style.color="";
+			}
+			if((intrest=="")||(isNaN(intrest)))
+			{
+				document.getElementById('intrest').style.borderColor="red";
+				document.getElementById('intresterror').style.color="red";
+				document.getElementById('intresterror').innerHTML="Enter Your Interest Amount";
+				status=false;
+			}else
+			{
+				document.getElementById('intrest').style.borderColor="";
+				document.getElementById('intresterror').innerHTML="";
+				document.getElementById('intresterror').style.color="";
+			}
+			if((pyears=="")||(isNaN(pyears)))
+			{
+				document.getElementById('pyears').style.borderColor="red";
+				document.getElementById('pyearserror').style.color="red";
+				document.getElementById('pyearserror').innerHTML="Enter Your Period Years";
+				status=false;
+			}else
+			{
+				document.getElementById('pyears').style.borderColor="";
+				document.getElementById('pyearserror').innerHTML="";
+				document.getElementById('pyearserror').style.color="";
+			}
+
+			return status;
+		}
+		
+	</script>
+	<style type="text/css">
+		#main{
+			border: 3px solid #000000;
+			padding: 25px;
+			margin: 10px;
+			max-width: 600px;
+			border-radius: 8px;
+			background-image: linear-gradient(#e6ffcc, #ffff99,#a6ff4d);
+		}
+		
+		#result1{
+			
+			
+			padding: 10px;
+			margin: 7px;
+			border-radius: 8px;
+			box-shadow: 10px;
+
+		}
+		
+		h3{
+			color:white;
+  			text-shadow: 2px 2px 4px #000000;
+  			font-size: 23px;
+  			font-weight: bold;
+  			padding: auto;
+  			text-align: center;
+  			
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-4" id="main">
+			<h3>INTEREST CALCULATER</h3>
+			<br>
+			<div class="form-group">
+				<label>Principal</label>
+				<input type="text" name="" id="principal" placeholder="Enter Principal Amount" class="form-control">
+				<i id="principalerror"></i>
+			</div>
+			<div class="form-group">
+				<label>Intrest Rate</label>
+				<input type="text" name="" id="intrest" placeholder="Enter Interest Rate" class="form-control">
+				<i id="intresterror"></i>
+			</div>
+			<div class="form-group">
+				<label>Period Years</label>
+				<input type="text" name="" id="pyears" placeholder="Enter Period In Years" class="form-control">
+				<i id="pyearserror"></i>
+			</div>
+			
+			<br>
+			<div class="text-center">
+				<button type="submit" id="btn1" class="btn btn-danger btn-block" onclick="simpleIntrest()">Calculate</button>
+			</div>
+			<div class="row" id="result1">
+			<p id="simple" ></p>
+			<p id="int"></p>
+			<p id="diff"></p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			
+		</div>
+	</div>
+
+</body>
+</html>
